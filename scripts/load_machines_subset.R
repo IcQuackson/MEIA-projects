@@ -1,4 +1,7 @@
 load_machines_subset <- function() {
+  if (!requireNamespace("rrcov", quietly = TRUE)) {
+    install.packages("rrcov")
+  }
   library(rrcov)
   data("machines")
   
