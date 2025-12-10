@@ -1,9 +1,9 @@
 source("scripts/load_machines_subset.R")
 
-compute_classic_pca <- function(X = load_machines_subset(),
-                                out_dir = "plots/plots_pca_original") {
+compute_pca <- function(X = load_machines_subset(),
+                                out_dir = "plots/plots_pca_original", std = FALSE) {
 
-  pca <- prcomp(X, center = TRUE, scale. = FALSE)
+  pca <- prcomp(X, center = TRUE, scale. = std)
   pve  <- (pca$sdev^2) / sum(pca$sdev^2)
   cpve <- cumsum(pve)
   k <- which(cpve >= 0.95)[1]
