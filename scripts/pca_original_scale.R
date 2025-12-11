@@ -90,23 +90,65 @@ compute_pca <- function(X = load_machines_subset(),
   # -------------------------------
   # PLOT 3: Scores plot (PC1 vs PC2)
   # -------------------------------
+
+  library(ggplot2)
+  library(ggrepel)
+
+  # -------------------------------
+  # PLOT 3: Scores plot (PC1 vs PC2) - ggplot + ggrepel
+  # -------------------------------
+  
   scores <- pca$x
+  rownames(scores) <- rownames(X)
+  
+  scores_df <- data.frame(
+    PC1  = scores[, 1],
+    PC2  = scores[, 2],
+    name = rownames(scores)
+  )
+  
+  med1 <- median(scores_df$PC1)
+  med2 <- median(scores_df$PC2)
+  
+  scores_df$dist <- sqrt((scores_df$PC1 - med1)^2 + (scores_df$PC2 - med2)^2)
+  
+  # top 25% have label
+  thr <- quantile(scores_df$dist, 0.75)
+  scores_df$label <- ifelse(scores_df$dist > thr, scores_df$name, "")
+  
+  # jitter to split coincident points
+  scores_df$PC1_j <- jitter(scores_df$PC1, amount = diff(range(scores_df$PC1)) * 0.01)
+  scores_df$PC2_j <- jitter(scores_df$PC2, amount = diff(range(scores_df$PC2)) * 0.01)
+  
   png(
     filename = file.path(out_dir, "03_scores_pc1_pc2.png"),
-    width = 1200,
+    width  = 800,
     height = 800,
-    res = 150
+    res    = 150
   )
-  plot(
-    scores[, 1],
-    scores[, 2],
-    pch = 19,
-    main = "Scores plot (PC1 vs PC2)",
-    xlab = "PC1 score",
-    ylab = "PC2 score"
-  )
-  abline(h = 0, v = 0, lty = 2)
+  
+  p <- ggplot(scores_df, aes(PC1_j, PC2_j)) +
+    geom_point() +
+    geom_vline(xintercept = 0, linetype = 2) +
+    geom_hline(yintercept = 0, linetype = 2) +
+    geom_text_repel(
+      aes(label = label),
+      size        = 3.5,
+      max.overlaps = 50
+    ) +
+    labs(
+      title = "Scores plot (PC1 vs PC2)",
+      x     = "PC1 score",
+      y     = "PC2 score"
+    ) +
+    coord_fixed() +
+    theme_classic(base_size = 14) +
+    theme(aspect.ratio = 1)
+  
+  print(p)
+  
   dev.off()
+  
 
   # -------------------------------
   # PLOT 4: Loadings barplots (PC1 and PC2)
@@ -159,4 +201,4 @@ compute_pca <- function(X = load_machines_subset(),
   cat("  05_biplot_pc1_pc2.png\n")
 }
 
-compute_classic_pca()
+compute_pca()
