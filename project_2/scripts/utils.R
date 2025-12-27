@@ -12,5 +12,3 @@ load_soils_subset <- function() {
 	soils_subset <- Soils[, (ncol(Soils) - 8):ncol(Soils)]
 	soils_subset
 }
-
-load_soils_subset()
