@@ -1,0 +1,49 @@
+#load dataset, n sei se já fizeram
+library(carData)
+data("Soils")
+soils <- Soils[, c("pH","N","Dens","P","Ca","Mg","K","Na","Conduc")]
+mod <- lm(pH ~ ., data = soils)
+summary(mod)
+
+#load da coluna predictors das observações 12 e 24
+new12 <- soils[12, -1, drop = FALSE]
+new24 <- soils[24, -1, drop = FALSE]
+
+#faz 97.5% confidence intreval dos valores, CI
+predict(mod, newdata = new12, interval = "confidence", level = 0.975)
+predict(mod, newdata = new24, interval = "confidence", level = 0.975)
+
+#faz 97.5% prediction intreval dos valores, PI
+predict(mod, newdata = new12, interval = "prediction", level = 0.975)
+predict(mod, newdata = new24, interval = "prediction", level = 0.975)
+
+#Leverages
+hat_vals <- hatvalues(mod)
+c(hat12 = hat_vals[12], hat24 = hat_vals[24])
+
+#combina leverage com descrepancia, Cook's Distance
+cooks <- cooks.distance(mod)
+c(cook12 = cooks[12], cook24 = cooks[24])
+
+#residual standard error
+summary(mod)$sigma
+
+#studentized
+rstd <- rstandard(mod)
+rstu <- rstudent(mod)
+rstd[12]; rstd[24]
+
+#par-parameter influence para a obs 12 
+dfb <- dfbetas(mod)
+dfb[12, ]
+
+#compilação dos valores das observações 12 e 24
+data.frame(obs = c(12,24), hat = hat_vals[c(12,24)], cooks = cooks[c(12,24)], rstandard = rstd[c(12,24)], rstudent = rstu[c(12,24)])
+
+#grafico de cooks e cooks distance 
+plot(mod, which = 4)
+plot(mod, which = 5)
+
+#Grafico da Influencia
+install.packages("car")
+ car::influenceIndexPlot(mod) 
