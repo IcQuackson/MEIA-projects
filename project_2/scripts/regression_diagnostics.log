@@ -1,0 +1,82 @@
+
+FULL MODEL (raw scale)
+Overall F-test p-value: 8.287532e-10 
+R-squared: 0.7563051 
+Adj R-squared: 0.7063164 
+
+FULL MODEL (standardized predictors)
+Overall F-test p-value: 8.287532e-10 
+R-squared: 0.7563051 
+Adj R-squared: 0.7063164 
+
+Predictors with p-value > 0.05 in standardized full model:
+     Dens        Mg         P         K         N 
+0.1798857 0.2221994 0.2378273 0.3116880 0.3382976 
+
+BEST SUBSET (standardized predictors)
+BIC-min subset size: 3  BIC: -43.9655 
+AdjR2-max subset size: 6  AdjR2: 0.7086938 
+Selected by BIC:
+[1] "Ca"     "Na"     "Conduc"
+
+STEPWISE AIC selected formula:
+pH ~ Dens + Ca + Na + Conduc
+
+FINAL MODEL (raw scale; BIC subset)
+Formula: pH ~ Ca + Na + Conduc
+Overall F-test p-value: 6.710752e-12 
+R-squared: 0.7101953 
+Adj R-squared: 0.6904359 
+
+              Estimate Std. Error   t value     Pr(>|t|)
+(Intercept)  4.1511678 0.39368516 10.544385 1.270015e-13
+Ca           0.1055346 0.03056980  3.452250 1.239907e-03
+Na           0.1505227 0.07194975  2.092053 4.223705e-02
+Conduc      -0.1778898 0.06575349 -2.705404 9.668292e-03
+RStudioGD 
+        2 
+      model k        R2     adjR2     F_pvalue      AIC      BIC
+1      full 8 0.7563051 0.7063164 8.287532e-10 49.25886 67.97087
+2   stepAIC 4 0.7264289 0.7009804 1.310973e-11 46.80979 58.03700
+3 final_BIC 3 0.7101953 0.6904359 6.710752e-12 47.57679 56.93279
+
+FULL MODEL (raw scale)
+Overall F-test p-value: 8.287532e-10 
+R-squared: 0.7563051 
+Adj R-squared: 0.7063164 
+
+FULL MODEL (standardized predictors)
+Overall F-test p-value: 8.287532e-10 
+R-squared: 0.7563051 
+Adj R-squared: 0.7063164 
+
+Predictors with p-value > 0.05 in standardized full model:
+     Dens        Mg         P         K         N 
+0.1798857 0.2221994 0.2378273 0.3116880 0.3382976 
+
+BEST SUBSET (standardized predictors)
+BIC-min subset size: 3  BIC: -43.9655 
+AdjR2-max subset size: 6  AdjR2: 0.7086938 
+Selected by BIC:
+[1] "Ca"     "Na"     "Conduc"
+
+STEPWISE AIC selected formula:
+pH ~ Dens + Ca + Na + Conduc
+
+FINAL MODEL (raw scale; BIC subset)
+Formula: pH ~ Ca + Na + Conduc
+Overall F-test p-value: 6.710752e-12 
+R-squared: 0.7101953 
+Adj R-squared: 0.6904359 
+
+              Estimate Std. Error   t value     Pr(>|t|)
+(Intercept)  4.1511678 0.39368516 10.544385 1.270015e-13
+Ca           0.1055346 0.03056980  3.452250 1.239907e-03
+Na           0.1505227 0.07194975  2.092053 4.223705e-02
+Conduc      -0.1778898 0.06575349 -2.705404 9.668292e-03
+RStudioGD 
+        2 
+      model k        R2     adjR2     F_pvalue      AIC      BIC
+1      full 8 0.7563051 0.7063164 8.287532e-10 49.25886 67.97087
+2   stepAIC 4 0.7264289 0.7009804 1.310973e-11 46.80979 58.03700
+3 final_BIC 3 0.7101953 0.6904359 6.710752e-12 47.57679 56.93279
