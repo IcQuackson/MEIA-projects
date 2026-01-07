@@ -10,4 +10,7 @@ pairs(datascale, main = "Scatterplot matrix – Soils data")
 
 library(corrplot)
 cor_matrix <- cor(datascale)
-corrplot::corrplot(cor_matrix, method="color", type="upper")
+corrplot::corrplot(cor_matrix, method="color", 
+                   type="upper", 
+                   addCoef.col = "black",
+                   number.cex = 0.7)
