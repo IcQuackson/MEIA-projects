@@ -10,12 +10,12 @@ new12 <- soils[12, -1, drop = FALSE]
 new24 <- soils[24, -1, drop = FALSE]
 
 #faz 97.5% confidence intreval dos valores, CI
-predict(mod, newdata = new12, interval = "confidence", level = 0.975)
-predict(mod, newdata = new24, interval = "confidence", level = 0.975)
+ci12 <- predict(mod, newdata = new12, interval = "confidence", level = 0.975)
+ci24 <- predict(mod, newdata = new24, interval = "confidence", level = 0.975)
 
 #faz 97.5% prediction intreval dos valores, PI
-predict(mod, newdata = new12, interval = "prediction", level = 0.975)
-predict(mod, newdata = new24, interval = "prediction", level = 0.975)
+pi12 <- predict(mod, newdata = new12, interval = "prediction", level = 0.975)
+pi24 <- predict(mod, newdata = new24, interval = "prediction", level = 0.975)
 
 #Leverages
 hat_vals <- hatvalues(mod)
